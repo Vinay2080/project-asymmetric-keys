@@ -1,0 +1,17 @@
+services:
+  postgres:
+    container_name: postgres_container_spring_security_3
+    image: postgres:17.6
+    environment:
+      POSTGRES_DB: security_project_3
+      POSTGRES_USER: compose_user
+      POSTGRES_PASSWORD: compose_password
+      PGDATA: /var/lib/postgresql/data/postgres
+    volumes:
+      - postgres_data_spring_security_3:/var/lib/postgresql/data/postgres
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data_spring_security_3:
