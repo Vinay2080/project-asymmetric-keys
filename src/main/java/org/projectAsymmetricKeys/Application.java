@@ -1,4 +1,4 @@
-package org.securityproject3.projectasymmetrickeys;
+package org.projectAsymmetricKeys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

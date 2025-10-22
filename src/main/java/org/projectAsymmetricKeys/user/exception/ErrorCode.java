@@ -1,0 +1,29 @@
+package org.projectAsymmetricKeys.user.exception;
+
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
+
+@Getter
+public enum ErrorCode {
+    USER_NOT_FOUND("USER NOT FOUND", "user %s not found", HttpStatus.NOT_FOUND),
+
+    CONFIRM_PASSWORD_MISMATCH("CONFIRM PASSWORD MISMATCH","new password does not match with confirm password" ,HttpStatus.BAD_REQUEST),
+
+    CURRENT_PASSWORD_MISMATCH("CURRENT PASSWORD MISMATCH","password does not match with current password" ,HttpStatus.UNAUTHORIZED ),
+
+    NO_STATUS_CHANGE("NO STATUS CHANGE","account is already in requested state (enabled/ disabled)" , HttpStatus.CONFLICT);
+
+    private final String code;
+    private final String defaultMessage;
+    private final HttpStatus httpStatus;
+
+    ErrorCode(
+            final String code,
+            final String defaultMessage,
+            final HttpStatus httpStatus
+    ) {
+        this.code = code;
+        this.defaultMessage = defaultMessage;
+        this.httpStatus = httpStatus;
+    }
+}

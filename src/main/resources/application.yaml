@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: project-asymmetric-keys
+  datasource:
+        url: jdbc:postgresql://${db_url}:${db_port}/${db_name}
+        username: ${db_username}
+        password: ${db_password}
+        driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    show-sql: true
+
+
