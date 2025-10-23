@@ -8,7 +8,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -55,16 +57,16 @@ public class User implements UserDetails {
     @Column(name = "is_account_locked")
     private boolean locked;
 
-    @Column(name = "IS_CRENDETIAL_EXPIRED")
+    @Column(name = "is_credential_expired")
     private boolean credentialsExpired;
 
-    @Column(name = "IS_EMAIL_VERIFIED")
+    @Column(name = "is_email_verified")
     private boolean emailVerified;
 
-    @Column(name = "PROFILE_PICTURE_URL")
+    @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    @Column(name = "IS_PHONE_VERIFIED")
+    @Column(name = "is_phone_verified")
     private boolean phoneVerified;
 
     @CreatedDate
@@ -90,50 +92,42 @@ public class User implements UserDetails {
     )
 
     private List<Role> roles;
-
-    @OneToMany(mappedBy = "user")
-    private List<Todo> todos;
-
-    public void addRole(final Role role){
-        this.roles.add(role);
-        roles
-                .getUsers()
-                .add(this);
-    }
-
-
+// todo: table relationships
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
 
-    @Override
-    public String getPassword() {
-        return "";
+        if (CollectionUtils.isEmpty(this.roles)){
+        return List.of();
+        }
+        return this.roles.stream().map(role ->new SimpleGrantedAuthority(role.getName())).toList();
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.email;
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
+        return !this.locked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
+        return !this.credentialsExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return this.enabled;
+    }
+
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
     }
 }

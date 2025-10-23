@@ -1,4 +1,4 @@
-package org.projectAsymmetricKeys.user.exception;
+package org.projectAsymmetricKeys.exception;
 
 public class BusinessException extends RuntimeException {
 
