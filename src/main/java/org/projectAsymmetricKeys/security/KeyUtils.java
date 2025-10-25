@@ -2,7 +2,6 @@ package org.projectAsymmetricKeys.security;
 
 import java.io.InputStream;
 import java.security.KeyFactory;
-
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -13,7 +12,7 @@ public class KeyUtils {
     private KeyUtils() {
     }
 
-    private static PrivateKey loadPrivateKey(final String pemPath) throws Exception {
+    public static PrivateKey loadPrivateKey(final String pemPath) throws Exception {
         final String key = readKeyFromResources(pemPath)
                 .replace("-----BEGIN PRIVATE KEY-----", "")
                 .replace("-----END PRIVATE KEY-----", "")

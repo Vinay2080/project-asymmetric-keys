@@ -9,9 +9,13 @@ public enum ErrorCode {
 
     CONFIRM_PASSWORD_MISMATCH("CONFIRM PASSWORD MISMATCH","new password does not match with confirm password" ,HttpStatus.BAD_REQUEST),
 
-    CURRENT_PASSWORD_MISMATCH("CURRENT PASSWORD MISMATCH","password does not match with current password" ,HttpStatus.UNAUTHORIZED ),
+    CURRENT_PASSWORD_MISMATCH("CURRENT PASSWORD MISMATCH","password does not match with current password" ,HttpStatus.FORBIDDEN ),
 
-    NO_STATUS_CHANGE("NO STATUS CHANGE","account is already in requested state (enabled/ disabled)" , HttpStatus.CONFLICT);
+    NO_STATUS_CHANGE("NO STATUS CHANGE","account is already in requested state (enabled/ disabled)" , HttpStatus.CONFLICT),
+    INVALID_JWT_TOKEN("INVALID JWT TOKEN","invalid jwt token = %s" ,HttpStatus.UNAUTHORIZED ),
+    INVALID_JWT_TOKEN_TYPE("INVALID JWT TOKEN TYPE", "invalid jwt token type expected 'REFRESH_TOKEN' got %s ",HttpStatus.UNAUTHORIZED ),
+
+    JWT_TOKEN_EXPIRED("REFRESH TOKEN EXPIRED","token expired on date = %s" , HttpStatus.UNAUTHORIZED);
 
     private final String code;
     private final String defaultMessage;

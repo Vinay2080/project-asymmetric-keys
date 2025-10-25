@@ -13,3 +13,4 @@ public class BusinessException extends RuntimeException {
         return errorCode.getDefaultMessage();
     }
 }
+// todo pass arguments from where the exception is called when required

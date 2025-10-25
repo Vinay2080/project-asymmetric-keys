@@ -3,7 +3,6 @@ package org.projectAsymmetricKeys.user;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
 import org.projectAsymmetricKeys.user.request.ChangePasswordRequest;
 import org.projectAsymmetricKeys.user.request.ProfileUpdateRequest;
 import org.springframework.http.HttpStatus;
