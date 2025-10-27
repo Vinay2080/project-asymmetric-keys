@@ -21,6 +21,23 @@ app:
       expiration:
         access-token: 900000 # 15 minutes
         refresh-token: 604800000 # 7 days
-        
+    disposable-email:
+      - 10minutemail
+      - 20minutemail
+      - 33mail
+      - 5ymail
+      - anonbox
+      - guerrillamail
+      - maildrop
+      - mailinator
+      - mailnesia
+      - moakt
+      - my10minutemail
+      - temp-mail
+      - tempmail
+      - throwawaymail
+      - trashmail
+      - truemail
+      - yopmail
 
 

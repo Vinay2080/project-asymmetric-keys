@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+// todo add validations and pull request from ALI BOULI
 public class ChangePasswordRequest  {
     private String currentPassword;
     private String newPassword;

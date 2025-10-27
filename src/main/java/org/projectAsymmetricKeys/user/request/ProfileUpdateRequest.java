@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+// todo add validations and pull request from ALI BOULI
 public class ProfileUpdateRequest {
     private String firstName;
     private String lastName;
