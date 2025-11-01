@@ -43,7 +43,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
 
         final User user = (User) authentication.getPrincipal();
         final String token = jwtServices.generateAccessToken(user.getUsername());
-        final String refreshToken = jwtServices.refreshAccessToken(user.getUsername());
+        final String refreshToken = jwtServices.generateRefreshToken(user.getUsername());
         final String tokenType = "Bearer";
         return AuthenticationResponse.builder()
                 .accessToken(token)

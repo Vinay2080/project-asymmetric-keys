@@ -16,7 +16,7 @@ public class KeyUtils {
         final String key = readKeyFromResources(pemPath)
                 .replace("-----BEGIN PRIVATE KEY-----", "")
                 .replace("-----END PRIVATE KEY-----", "")
-                .replace("\\s", "");
+                .replaceAll("\\s", "");
 
         final byte[] decoded = Base64.getDecoder().decode(key);
         final PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoded);
@@ -24,7 +24,8 @@ public class KeyUtils {
     }
 
     public static PublicKey loadPublicKey(final String pemPath) throws Exception {
-        final String key = readKeyFromResources(pemPath).replace("-----BEGIN PUBLIC KEY-----", "")
+        final String key = readKeyFromResources(pemPath)
+                .replace("-----BEGIN PUBLIC KEY-----", "")
                 .replace("-----END PUBLIC KEY-----", "")
                 .replaceAll("\\s", "");
 

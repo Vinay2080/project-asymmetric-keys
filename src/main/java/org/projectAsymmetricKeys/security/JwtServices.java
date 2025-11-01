@@ -38,7 +38,7 @@ public class JwtServices {
     }
 
     public String generateRefreshToken(final String username) {
-        Map<String, Object> claims = Map.of(TOKEN_TYPE, "refresh_token");
+        Map<String, Object> claims = Map.of(TOKEN_TYPE, "REFRESH_TOKEN");
 
         return buildToken(username, claims, refreshTokenExpiration);
     }
@@ -71,7 +71,7 @@ public class JwtServices {
     private Claims extractAllClaims(String token) {
         try {
             return Jwts.parser()
-                    .verifyWith(publicKey)
+                    .verifyWith(this.publicKey)
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();

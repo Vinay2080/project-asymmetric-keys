@@ -35,7 +35,7 @@ public class UserMapper {
         if (StringUtils.isNotBlank(request.getLastName()) && !savedUser.getLastName().equals(request.getLastName())) {
             savedUser.setLastName(request.getLastName());
         }
-        if (request.getDateOfBirth() != null && !savedUser.getDateOfBirth().equals(request.getDateOfBirth())) {
+        if (request.getDateOfBirth() != null && (savedUser.getDateOfBirth() == null || !savedUser.getDateOfBirth().equals(request.getDateOfBirth()))) {
             savedUser.setDateOfBirth(request.getDateOfBirth());
         }
     }

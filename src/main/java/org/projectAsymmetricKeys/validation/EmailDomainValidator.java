@@ -14,8 +14,7 @@ public class EmailDomainValidator implements ConstraintValidator<NonDisposableEm
     private final Set<String> blocked;
 
     public EmailDomainValidator(
-            @Value("${app.security.disposable-email}") final List<String> domains
-    ) {
+            @Value("app.security.disposable-email") final List<String> domains) {
         this.blocked = domains.stream()
                 .map(String::toLowerCase)
                 .collect(Collectors.toSet());
