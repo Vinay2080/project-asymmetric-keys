@@ -3,6 +3,7 @@ package org.projectAsymmetricKeys.user;
 import jakarta.persistence.*;
 import lombok.*;
 import org.projectAsymmetricKeys.role.Role;
+import org.projectAsymmetricKeys.todo.Todo;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -91,7 +92,10 @@ public class User implements UserDetails {
     )
 
     private List<Role> roles;
-// todo: table relationships
+
+    @OneToMany(mappedBy = "user")
+    private List<Todo> todos;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 

@@ -21,7 +21,8 @@ public enum ErrorCode {
     ERROR_USER_DISABLED("ERROR_USER_DISABLED", "User account is disabled, please activate your account or contact the administrator", HttpStatus.FORBIDDEN),
     BAD_CREDENTIALS("BAD_CREDENTIALS", "username or/and password is incorrect", HttpStatus.UNAUTHORIZED),
     USERNAME_NOT_FOUND("USER_NOT_FOUND", "cannot find user with provided username %s", HttpStatus.NOT_FOUND),
-    INTERNAL_EXCEPTION("INTERNAL_EXCEPTION", "an internal error occurred, please try again later or contact the admin", HttpStatus.INTERNAL_SERVER_ERROR);
+    INTERNAL_EXCEPTION("INTERNAL_EXCEPTION", "an internal error occurred, please try again later or contact the admin", HttpStatus.INTERNAL_SERVER_ERROR),
+    CATEGORY_ALREADY_EXISTS_FOR_USER("CATEGORY_ALREADY_EXISTS_FOR_USER", "A category with this name already exists for the user", HttpStatus.CONFLICT);
 
     private final String code;
     private final String defaultMessage;

@@ -51,7 +51,7 @@ public class UserController {
             @RequestBody
             @Valid
             final Authentication authentication){
-        this.userService.deactivateAccount(getUserId(authentication));
+        this.userService.reactivateAccount(getUserId(authentication));
     }
 
     private String getUserId(Authentication authentication) {

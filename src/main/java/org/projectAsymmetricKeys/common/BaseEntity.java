@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String ID;
 
     @CreatedDate
     @Column(name = "created_date", updatable = false, nullable = false)
