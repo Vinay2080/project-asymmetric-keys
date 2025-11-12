@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateProfileInfo(final ProfileUpdateRequest request, final String userId) {
-        final User savedUser = this.userRepository.findById(userId).orElseThrow(()-> new BusinessException(ErrorCode.USER_NOT_FOUND, userId));
+        final User savedUser = this.userRepository.findById(userId).orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND, userId));
         this.userMapper.mergeUserInfo(savedUser, request);
 //        this.userRepository.save(savedUser);
     }
@@ -38,11 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void changePassword(final ChangePasswordRequest request, final String userId) {
-        if (!request.getNewPassword().equals(request.getConfirmNewPassword())){
+        if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
             throw new BusinessException(ErrorCode.CONFIRM_PASSWORD_MISMATCH);
         }
-        User user = this.userRepository.findById(userId).orElseThrow(()-> new BusinessException(ErrorCode.USER_NOT_FOUND));
-        if (!passwordEncoder.matches(request.getCurrentPassword(),user.getPassword())){
+        User user = this.userRepository.findById(userId).orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
             throw new BusinessException(ErrorCode.CURRENT_PASSWORD_MISMATCH);
         }
         String encodedPassword = passwordEncoder.encode(request.getConfirmNewPassword());
@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deactivateAccount(final String userId) {
-        User user = this.userRepository.findById(userId).orElseThrow(()-> new BusinessException(ErrorCode.USER_NOT_FOUND));
+        User user = this.userRepository.findById(userId).orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
-        if(!user.isEnabled()){
+        if (!user.isEnabled()) {
             throw new BusinessException(ErrorCode.NO_STATUS_CHANGE);
         }
         user.setEnabled(false);
@@ -64,9 +64,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void reactivateAccount(final String userId) {
-        User user = this.userRepository.findById(userId).orElseThrow(()-> new BusinessException(ErrorCode.USER_NOT_FOUND));
+        User user = this.userRepository.findById(userId).orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
-        if(user.isEnabled()){
+        if (user.isEnabled()) {
             throw new BusinessException(ErrorCode.NO_STATUS_CHANGE);
         }
         user.setEnabled(true);
