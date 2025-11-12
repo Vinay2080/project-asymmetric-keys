@@ -13,8 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class BeansConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return  new BCryptPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -23,7 +23,7 @@ public class BeansConfig {
     }
 
     @Bean
-    public AuditorAware<String> auditorAware(){
+    public AuditorAware<String> auditorAware() {
         return new ApplicationAuditAware();
     }
 }

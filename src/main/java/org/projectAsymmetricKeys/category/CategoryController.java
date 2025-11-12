@@ -29,7 +29,7 @@ public class CategoryController {
             @Valid final CreateCategoryRequest request,
             final Authentication authentication
     ) {
-        final String userID = ((User) authentication.getPrincipal()).getId();
+        final String userID = ((User) authentication.getPrincipal()).getID();
         final String catID = categoryService.createCategory(request, userID);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(catID));
     }
@@ -41,7 +41,7 @@ public class CategoryController {
             @PathVariable("category-id") final String categoryID,
             final Authentication authentication
     ) {
-        final String userID = ((User) authentication.getPrincipal()).getId();
+        final String userID = ((User) authentication.getPrincipal()).getID();
         categoryService.updateCategory(request, userID, categoryID);
         return ResponseEntity.accepted().build();
     }
@@ -50,7 +50,7 @@ public class CategoryController {
     public ResponseEntity<List<CategoryResponse>> findAllCategories(
             @Valid final Authentication authentication
     ) {
-        final String userID = ((User) authentication.getPrincipal()).getId();
+        final String userID = ((User) authentication.getPrincipal()).getID();
         return ResponseEntity.ok(categoryService.findAllByOwner(userID));
     }
 

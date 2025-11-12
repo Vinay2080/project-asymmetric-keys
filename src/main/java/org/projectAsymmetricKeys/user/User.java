@@ -31,7 +31,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String ID;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -99,10 +99,10 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        if (CollectionUtils.isEmpty(this.roles)){
-        return List.of();
+        if (CollectionUtils.isEmpty(this.roles)) {
+            return List.of();
         }
-        return this.roles.stream().map(role ->new SimpleGrantedAuthority(role.getName())).toList();
+        return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).toList();
     }
 
     @Override
@@ -130,7 +130,7 @@ public class User implements UserDetails {
         return this.enabled;
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return this.firstName + " " + this.lastName;
     }
 }

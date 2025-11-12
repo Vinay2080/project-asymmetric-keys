@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class AuthenticationRequest {
-    @NotBlank(message ="VALIDATION.AUTHENTICATION.EMAIL.NOT_BLANK")
+    @NotBlank(message = "VALIDATION.AUTHENTICATION.EMAIL.NOT_BLANK")
     @Email(message = "VALIDATION.AUTHENTICATION.EMAIL.FORMAT")
     @Schema(example = "user001@mail.com")
     private String email;

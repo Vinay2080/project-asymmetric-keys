@@ -17,12 +17,12 @@ public class ApplicationAuditAware implements AuditorAware<String> {
         final Authentication authentication = SecurityContextHolder
                 .getContext()
                 .getAuthentication();
-        if (authentication == null || !authentication.isAuthenticated() || authentication instanceof AnonymousAuthenticationToken){
-        return Optional.empty();
+        if (authentication == null || !authentication.isAuthenticated() || authentication instanceof AnonymousAuthenticationToken) {
+            return Optional.empty();
 
         }
         User user = (User) authentication.getPrincipal();
 
-        return Optional.ofNullable(user.getId());
+        return Optional.ofNullable(user.getID());
     }
 }

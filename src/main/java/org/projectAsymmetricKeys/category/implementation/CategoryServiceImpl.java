@@ -66,7 +66,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
-    private void checkCategoryUnicityForUser( final String name, final String userID) {
+    private void checkCategoryUnicityForUser(final String name, final String userID) {
         final boolean alreadyExistsForUser = categoryRepository.findByNameAndUserID(name, userID);
         if (alreadyExistsForUser) {
             throw new BusinessException(ErrorCode.CATEGORY_ALREADY_EXISTS_FOR_USER);

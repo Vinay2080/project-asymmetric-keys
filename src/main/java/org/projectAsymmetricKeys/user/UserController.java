@@ -21,8 +21,7 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void updateProfile(
             @RequestBody
-            @Valid
-            final ProfileUpdateRequest request,
+            @Valid final ProfileUpdateRequest request,
             final Authentication authentication) {
         this.userService.updateProfileInfo(request, getUserId(authentication));
     }
@@ -31,8 +30,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void changePassword(
             @RequestBody
-            @Valid
-            final ChangePasswordRequest request,
+            @Valid final ChangePasswordRequest request,
             final Authentication authentication) {
         this.userService.changePassword(request, getUserId(authentication));
     }
@@ -41,20 +39,19 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deactivateAccount(
             @RequestBody
-            @Valid
-            final Authentication authentication){
+            @Valid final Authentication authentication) {
         this.userService.deactivateAccount(getUserId(authentication));
     }
+
     @PatchMapping("/reactivate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void reactivateAccount(
             @RequestBody
-            @Valid
-            final Authentication authentication){
+            @Valid final Authentication authentication) {
         this.userService.reactivateAccount(getUserId(authentication));
     }
 
     private String getUserId(Authentication authentication) {
-        return ((User) authentication.getPrincipal()).getId();
+        return ((User) authentication.getPrincipal()).getID();
     }
 }

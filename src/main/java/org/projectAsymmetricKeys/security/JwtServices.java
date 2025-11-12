@@ -83,11 +83,11 @@ public class JwtServices {
     public String refreshAccessToken(final String refreshToken) {
         final Claims claims = extractAllClaims(refreshToken);
 
-        if (!"REFRESH_TOKEN".equals(claims.get(TOKEN_TYPE, String.class))){
-            throw new BusinessException(ErrorCode.INVALID_JWT_TOKEN_TYPE, claims.get(TOKEN_TYPE, String.class) );
+        if (!"REFRESH_TOKEN".equals(claims.get(TOKEN_TYPE, String.class))) {
+            throw new BusinessException(ErrorCode.INVALID_JWT_TOKEN_TYPE, claims.get(TOKEN_TYPE, String.class));
         }
 
-        if (claims.getExpiration().before(new Date())){
+        if (claims.getExpiration().before(new Date())) {
             throw new BusinessException(ErrorCode.JWT_TOKEN_EXPIRED, claims.getExpiration().toString());
         }
 

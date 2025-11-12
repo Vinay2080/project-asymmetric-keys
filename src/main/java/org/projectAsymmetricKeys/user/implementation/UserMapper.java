@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserMapper {
 
     private final PasswordEncoder passwordEncoder;
+
     public User toUser(RegistrationRequest request) {
         return User.builder()
                 .firstName(request.getFirstName())

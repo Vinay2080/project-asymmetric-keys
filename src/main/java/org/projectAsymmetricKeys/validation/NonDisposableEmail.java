@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = EmailDomainValidator.class)
 public @interface NonDisposableEmail {
-    String message() default  "Disposable emails are not allowed";
+    String message() default "Disposable emails are not allowed";
 
     Class<?>[] groups() default {};
 
