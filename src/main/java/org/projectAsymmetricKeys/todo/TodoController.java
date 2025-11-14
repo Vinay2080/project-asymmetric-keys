@@ -10,6 +10,7 @@ import org.projectAsymmetricKeys.todo.response.TodoResponse;
 import org.projectAsymmetricKeys.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,11 +36,12 @@ public class TodoController {
                 .body(new RestResponse(todoID));
     }
 
-    @PutMapping("/{todo-id}")
+    @PutMapping("/{todo-ID}")
+    @PreAuthorize("@todoSecurityService.isTodoOwner(#todoID)")
     public ResponseEntity<Void> updateTodo(
             @RequestBody
             @Valid final TodoUpdateRequest request,
-            @PathVariable("todo-id") final String todoID,
+            @PathVariable("todo-ID") final String todoID,
             final Authentication authentication
     ) {
         final String userID = ((User) authentication.getPrincipal()).getID();
@@ -47,9 +49,10 @@ public class TodoController {
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping("/{todo-id}")
+    @GetMapping("/{todo-ID}")
+    @PreAuthorize("@todoSecurityService.isTodoOwner(#todoID)")
     public ResponseEntity<TodoResponse> findTodoByID(
-            @PathVariable("todo-id") final String todoID
+            @PathVariable("todo-ID") final String todoID
     ) {
         return ResponseEntity.ok(todoService.findTodoByID(todoID));
     }
@@ -63,9 +66,10 @@ public class TodoController {
         return ResponseEntity.ok(todoService.findAllTodosForToday(userID));
     }
 
-    @GetMapping("/category/{category-id}")
+    @GetMapping("/category/{category-ID}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryID)")
     public ResponseEntity<List<TodoResponse>> findAllTodosByCategory(
-            @PathVariable("category-id") final String categoryID,
+            @PathVariable("category-ID") final String categoryID,
             final Authentication authentication
     ) {
         final String userID = ((User) authentication.getPrincipal()).getID();
@@ -77,15 +81,16 @@ public class TodoController {
     public ResponseEntity<List<TodoResponse>> findAllDueTodos(
             final Authentication authentication
     ) {
-        final String userId = ((User) authentication.getPrincipal()).getID();
-        return ResponseEntity.ok(this.todoService.findAllDueTodos(userId));
+        final String userID = ((User) authentication.getPrincipal()).getID();
+        return ResponseEntity.ok(this.todoService.findAllDueTodos(userID));
     }
 
-    @DeleteMapping("/{todo-id}")
-    public ResponseEntity<Void> deleteTodoById(
-            @PathVariable("todo-id") final String todoId
+    @DeleteMapping("/{todo-ID}")
+    @PreAuthorize("@todoSecurityService.isTodoOwner(#todoID)")
+    public ResponseEntity<Void> deleteTodoByID(
+            @PathVariable("todo-ID") final String todoID
     ) {
-        this.todoService.deleteTodosByID(todoId);
+        this.todoService.deleteTodosByID(todoID);
         return ResponseEntity.ok()
                 .build();
     }

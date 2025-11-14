@@ -3,12 +3,14 @@ package org.projectAsymmetricKeys.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 
+@Component
 public class EmailDomainValidator implements ConstraintValidator<NonDisposableEmail, String> {
 
     private final Set<String> blocked;

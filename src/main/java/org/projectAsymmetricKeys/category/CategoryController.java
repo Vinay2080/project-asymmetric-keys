@@ -10,6 +10,7 @@ import org.projectAsymmetricKeys.category.response.CategoryResponse;
 import org.projectAsymmetricKeys.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,8 @@ public class CategoryController {
     }
 
     @PutMapping("/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryID)")
+
     public ResponseEntity<Void> updateCategory(
             @RequestBody
             @Valid final UpdateCategoryRequest request,
@@ -55,6 +58,8 @@ public class CategoryController {
     }
 
     @GetMapping("/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryID)")
+
     public ResponseEntity<CategoryResponse> findCategoryByID(
             @PathVariable("category-id") final String categoryID
     ) {
@@ -62,6 +67,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryID)")
     public ResponseEntity<Void> deleteCategoryByID(
             @PathVariable("category-id") final String categoryID
     ) {
